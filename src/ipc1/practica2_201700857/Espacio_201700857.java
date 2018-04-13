@@ -20,6 +20,9 @@ ArrayList componentes;
 int up=0,down=0,left=0,right=0,b=0,a=0,posi=0;
 int x= 550;
 int y = 200;
+public static int[][] coor= new int[30][2];
+public static int pruebay;
+public static Traslacion_201700857 probamos;
 
 //public void Ship(){
 //    for(int i=0;i<Enemigos.length;i++){
@@ -185,7 +188,7 @@ KeyListener teclado = new KeyListener(){
                 posi=0;
             }
             Balas[posi].setLocation(x,y+23);
-            Traslacion_201700857 probamos = new Traslacion_201700857(y+23,posi,2);
+            probamos = new Traslacion_201700857(y+23,posi,2);
             posi++;
             
         }
