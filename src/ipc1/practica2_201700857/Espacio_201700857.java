@@ -22,7 +22,7 @@ int x= 550;
 int y = 200;
 public static int[][] coor= new int[30][2];
 public static int pruebay;
-public static Traslacion_201700857 probamos;
+public static Traslacion_201700857[] probamos = new Traslacion_201700857[30];
 
 //public void Ship(){
 //    for(int i=0;i<Enemigos.length;i++){
@@ -188,7 +188,7 @@ KeyListener teclado = new KeyListener(){
                 posi=0;
             }
             Balas[posi].setLocation(x,y+23);
-            probamos = new Traslacion_201700857(y+23,posi,2);
+            probamos[posi] = new Traslacion_201700857(y+23,posi,2);
             posi++;
             
         }
