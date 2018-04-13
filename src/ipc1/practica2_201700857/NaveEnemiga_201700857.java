@@ -8,6 +8,7 @@ public class NaveEnemiga_201700857 implements Runnable {
     String nave;
     JLabel[] Enemys;
     JLabel enemigo = new JLabel();
+    public static int[] impac = new int[30];
     
     public NaveEnemiga_201700857(){
 //        t = new Thread(this,"Nave");
