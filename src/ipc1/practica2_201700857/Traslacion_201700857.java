@@ -18,13 +18,18 @@ public class Traslacion_201700857 implements Runnable{
         t.start();
     }
     
+    public void detener(){
+        t.stop();
+    }
+    
     public String Impacto(int x,int y){
         int p=0;
         for (j=0;j<Espacio_201700857.Balas.length;j++){
             if(Espacio_201700857.coor[j][0]<(x+50)&&Espacio_201700857.coor[j][0]>(x)&&Espacio_201700857.coor[j][1]>(y-5)&&Espacio_201700857.coor[j][1]<(y+50)){
                p=1;
+//               Espacio_201700857.probamos.detener();
               Espacio_201700857.Balas[j].setLocation(700, y);
-              Espacio_201700857.probamos.balita=-35;
+              Espacio_201700857.probamos[j].balita=-35;
               
                 System.out.println("BIEN HECHO"+j);
                 return("IMPACTO");
@@ -55,7 +60,7 @@ public class Traslacion_201700857 implements Runnable{
                 if(Impacto(avance,y).equals("IMPACTO")){
                     avance=avance-10;
                     System.out.println("IMPACTO");
-                    Espacio_201700857.probamos.balita=-35;
+                    Espacio_201700857.probamos[j].balita=-35;
                     
                     NaveEnemiga_201700857.impac[posicion]++;
                     System.out.println("LLEVA ESTOS IMPACTOS "+NaveEnemiga_201700857.impac[posicion]);
