@@ -4,11 +4,12 @@ package ipc1.practica2_201700857;
 import javax.swing.*;
 
 public class NaveEnemiga_201700857 implements Runnable {
-    Thread t;
+    public static Thread t;
     String nave;
     JLabel[] Enemys;
     JLabel enemigo = new JLabel();
-    public static int[] impac = new int[30];
+    public static Traslacion_201700857 tr;
+    public static int[] impac = new int[50];
     
     public NaveEnemiga_201700857(){
 //        t = new Thread(this,"Nave");
@@ -26,6 +27,10 @@ public class NaveEnemiga_201700857 implements Runnable {
                 t = new Thread (this,"nave");
                 t.start();
     }
+    
+    public void stop(){
+        t.suspend();
+    }
 //    public NaveEnemiga_201700857(JLabel[] ship){
 ////        
 //    }
@@ -34,11 +39,12 @@ public class NaveEnemiga_201700857 implements Runnable {
             for(int i=0;i<Espacio_201700857.Enemigos.length;i++){
                 int y = 0;
                 int ran = (int)(Math.random()*(3000-2500+1)+2500);
-                y = (int)(Math.random()*440)+10;
+                y = (int)(Math.random()*420)+10;
                 Espacio_201700857.Enemigos[i].setLocation(0, y);
                 System.out.println(nave+" - valor: "+i);
+                NaveEnemiga_201700857.impac[i]=0;
 //                System.out.println(ran);
-                Traslacion_201700857 tr = new Traslacion_201700857(y,i,1);
+                tr = new Traslacion_201700857(y,i,1);
             Thread.sleep(ran);
             }
 //            enemigo.setBounds(0,0,60,50);
