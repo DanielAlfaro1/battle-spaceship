@@ -2,22 +2,34 @@
 package ipc1.practica2_201700857;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Traslacion_201700857 implements Runnable{
     public static Thread t;
     int y,posicion,avance=0,situacion,balita=545;
     int[][] lugarbala = new int[30][2];
     int algo=0,golpe=0;
-    public static int  hits =0;
+    public static int  hits =0,shield=0;
     int j;
     
     public void NoEscudo(){
-    if(hits>4){
-        Espacio_201700857.naveEscudo.setVisible(false);
-        Espacio_201700857.nave.setVisible(true);
-        Espacio_201700857.v=0;
-        hits=0;
+        if(hits==2){
+            Espacio_201700857.status.setIcon(new ImageIcon("img/shield2.png"));
+        }else{
+            if(hits==4){
+                Espacio_201700857.status.setIcon(new ImageIcon("img/shield1.png"));
+            }else{
+                 if(hits>4){
+                         Espacio_201700857.naveEscudo.setVisible(false);
+                         Espacio_201700857.nave.setVisible(true);
+                         Espacio_201700857.v=0;
+                         shield = 0;
+                         hits=0;
+                         Espacio_201700857.status.setIcon(new ImageIcon("img/shield0.png"));
     }
+            }
+        }
+   
 }
     
     public Traslacion_201700857(int y,int pos,int situacion){
@@ -32,13 +44,13 @@ public class Traslacion_201700857 implements Runnable{
         t.suspend();
     }
     
-    public String choque(int x, int y){
+     public String choque(int x, int y){
         int p=0;
         if( (Espacio_201700857.x+6)<(x+50)&&(Espacio_201700857.x+100)>x&&(((Espacio_201700857.y+20)<y)||(Espacio_201700857.y+10)<y+50 )&&(Espacio_201700857.y+45)>y ){
             if (Espacio_201700857.v==1) {
               golpe=2;
             }else{
-                System.out.println("hit1");
+//                System.out.println("hit1");
 //            return("HIT");
                 golpe=1;
             }
@@ -47,7 +59,7 @@ public class Traslacion_201700857 implements Runnable{
             if(Espacio_201700857.v==1){
                 golpe=2;
             }else{
-                System.out.println("hit2");
+//                System.out.println("hit2");
 //            return("HIT");
                 golpe=1;
             
@@ -61,6 +73,48 @@ public class Traslacion_201700857 implements Runnable{
             
         }else{if(golpe==2){
             hits++;
+            System.out.println(hits);
+            golpe=0;
+            
+           
+            return("LERO");
+        }else{
+            
+        return("NOPE");
+        }
+    }
+       
+    }
+    
+    public String escudito(int x, int y){
+        int p=0;
+        if( (Espacio_201700857.x+6)<(x+50)&&(Espacio_201700857.x+100)>x&&(((Espacio_201700857.y+20)<y)||(Espacio_201700857.y+10)<y+50 )&&(Espacio_201700857.y+45)>y ){
+            if (Espacio_201700857.v==1) {
+              golpe=2;
+            }else{
+//                System.out.println("hit1");
+//            return("HIT");
+                golpe=1;
+            }
+        }else{
+        if((Espacio_201700857.x+55)<(x+50)&&(Espacio_201700857.x+83)>x&&((Espacio_201700857.y+45)<y)&&(Espacio_201700857.y+65)>y ){
+            if(Espacio_201700857.v==1){
+                golpe=2;
+            }else{
+//                System.out.println("hit2");
+//            return("HIT");
+                golpe=1;
+            
+            }
+        }
+        }
+        if(golpe==1){
+            
+            golpe=0;
+            return("HIT");
+            
+        }else{if(golpe==2){
+//            hits++;
             golpe=0;
             
            
@@ -80,7 +134,7 @@ public class Traslacion_201700857 implements Runnable{
                p=1;
               Espacio_201700857.Balas[j].setLocation(700, y);
               Espacio_201700857.probamos[j].balita=-35;
-                System.out.println("BIEN HECHO"+j);
+//                System.out.println("BIEN HECHO"+j);
                 return("IMPACTO");
             }
             else{
@@ -116,6 +170,8 @@ public class Traslacion_201700857 implements Runnable{
                     if(Espacio_201700857.vida==0){
                         Espacio_201700857.PorcLife.setForeground(Color.red);
                     Espacio_201700857.x=800;
+                    detener();
+                    NaveEnemiga_201700857.t.suspend();
                     Espacio_201700857.nave.setLocation(500,500);
                     }
 //                    System.out.println(choque(avance,y));
@@ -132,10 +188,10 @@ public class Traslacion_201700857 implements Runnable{
                 }
                 if(Impacto(avance,y).equals("IMPACTO")){
                     avance=avance-10;
-                    System.out.println("IMPACTO");
+//                    System.out.println("IMPACTO");
                     Espacio_201700857.probamos[j].balita=-35;
                     NaveEnemiga_201700857.impac[posicion]++;
-                    System.out.println("LLEVA ESTOS IMPACTOS "+NaveEnemiga_201700857.impac[posicion]);
+//                    System.out.println("LLEVA ESTOS IMPACTOS "+NaveEnemiga_201700857.impac[posicion]);
                     if(NaveEnemiga_201700857.impac[posicion]>=3){
                     Espacio_201700857.Enemigos[posicion].setLocation(701, y);
                     avance=701;
@@ -159,6 +215,27 @@ public class Traslacion_201700857 implements Runnable{
                         Espacio_201700857.coor[posicion][1]=y;
                         Thread.sleep(6);
                     }while(balita>=-35);
+                }else{
+                    if(situacion==3){
+                        do{
+                avance = avance+1;
+                Espacio_201700857.Escudo[posicion].setLocation(avance,y);
+                Impacto(avance,y);
+                if(escudito(avance,y).equals("HIT")){
+                    avance=701;
+                    Espacio_201700857.Escudo[posicion].setLocation(701,y);
+                    
+                    shield++;
+                    
+                    
+//                    Espacio_201700857.x=800;
+//                    Espacio_201700857.nave.setLocation(500,500);
+                    Espacio_201700857.Escudo(shield);
+                    
+                }
+                Thread.sleep(6);
+                        }while(avance<=700);
+                    }
                 }
             }
         }catch (InterruptedException e){};
