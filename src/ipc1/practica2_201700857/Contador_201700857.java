@@ -14,8 +14,14 @@ public class Contador_201700857 implements Runnable{
      try{
          do{
          Espacio_201700857.Contador.setText(String.valueOf(tiempo));
-         System.out.println(tiempo);
+//         System.out.println(tiempo);
          tiempo++;
+         if (tiempo==15){
+             Escudo_201700857 esc = new Escudo_201700857();
+         }
+         if(tiempo==40){
+             Escudo_201700857 esc2 = new Escudo_201700857();
+         }
          Thread.sleep(1000);
          }while(tiempo<61);
 //             Espacio_201700857.probamos
